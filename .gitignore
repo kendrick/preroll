@@ -38,6 +38,9 @@ yarn.lock
 .env.local
 .env*.local
 
+# claude code per-developer overrides
+.claude/settings.local.json
+
 # vercel
 .vercel
 
