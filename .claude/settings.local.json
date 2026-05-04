@@ -11,7 +11,8 @@
       "Bash(pnpm ls *)",
       "Skill(humanizer)",
       "Skill(humanizer:*)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(echo \"---exit:$?\")"
     ]
   }
 }
