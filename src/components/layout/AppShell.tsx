@@ -19,6 +19,7 @@ import {
 	SidebarMenuItem,
 	SidebarProvider,
 	SidebarTrigger,
+	useSidebar,
 } from '@/components/ui/sidebar';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
@@ -47,16 +48,14 @@ export function AppShell({
 	className,
 	children,
 }: AppShellProps) {
-	const pathname = usePathname();
-
 	return (
 		<TooltipProvider>
 			<SidebarProvider defaultOpen={defaultOpen}>
 				<Sidebar collapsible="icon">
 					{brand
 						? (
-								<SidebarHeader>
-									<div className="flex min-h-9 items-center gap-2 px-1 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
+								<SidebarHeader className="group-data-[collapsible=icon]:hidden">
+									<div className="flex min-h-9 items-center gap-2 px-1">
 										{brand}
 									</div>
 								</SidebarHeader>
@@ -64,29 +63,7 @@ export function AppShell({
 						: null}
 					<SidebarContent>
 						<SidebarGroup>
-							<SidebarMenu>
-								{navigation.map((item) => {
-									const Icon = item.icon;
-									const isActive = isPathActive(pathname, item.href);
-									return (
-										<SidebarMenuItem key={item.href}>
-											<SidebarMenuButton
-												asChild
-												isActive={isActive}
-												tooltip={item.label}
-											>
-												<Link href={item.href}>
-													{Icon ? <Icon /> : null}
-													<span>{item.label}</span>
-												</Link>
-											</SidebarMenuButton>
-											{item.badge
-												? <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>
-												: null}
-										</SidebarMenuItem>
-									);
-								})}
-							</SidebarMenu>
+							<NavMenu navigation={navigation} />
 						</SidebarGroup>
 					</SidebarContent>
 					{footer
@@ -117,6 +94,47 @@ export function AppShell({
 				</SidebarInset>
 			</SidebarProvider>
 		</TooltipProvider>
+	);
+}
+
+// Extracted as a child of SidebarProvider so it can read sidebar state via
+// useSidebar. AppShell itself is the parent of SidebarProvider and can't.
+function NavMenu({ navigation }: { navigation: AppShellNavItem[] }) {
+	const pathname = usePathname();
+	const { isMobile, setOpenMobile } = useSidebar();
+
+	// Mobile sidebar opens as a Sheet over the page; without this it stays
+	// open on top of the destination route after a tap. Desktop sidebar is
+	// permanently visible, so leave its expanded/collapsed state alone.
+	function handleNavClick() {
+		if (isMobile)
+			setOpenMobile(false);
+	}
+
+	return (
+		<SidebarMenu>
+			{navigation.map((item) => {
+				const Icon = item.icon;
+				const isActive = isPathActive(pathname, item.href);
+				return (
+					<SidebarMenuItem key={item.href}>
+						<SidebarMenuButton
+							asChild
+							isActive={isActive}
+							tooltip={item.label}
+						>
+							<Link href={item.href} onClick={handleNavClick}>
+								{Icon ? <Icon /> : null}
+								<span>{item.label}</span>
+							</Link>
+						</SidebarMenuButton>
+						{item.badge
+							? <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>
+							: null}
+					</SidebarMenuItem>
+				);
+			})}
+		</SidebarMenu>
 	);
 }
 
