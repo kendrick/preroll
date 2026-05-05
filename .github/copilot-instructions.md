@@ -1,20 +1,12 @@
-# AGENTS.md
-
-## Stack
-
-<!-- One line per layer. Detected from project. -->
-
-## Build / Test / Lint
-
-<!-- Copy exact commands so agents don't guess. -->
+# Copilot Project Instructions
 
 ## Memory Bank
 
-This project uses a two-tier memory bank at `memory-bank/`.
+This project maintains a two-tier memory bank at `memory-bank/` for cross-session context.
 
 ### Always read on session start:
 
-- `memory-bank/activeContext.md` — Current focus, last decision, known risks (≤20 lines, local only / gitignored)
+- `memory-bank/activeContext.md` — Current focus, last decision, known risks (≤20 lines, local only)
 
 ### Read on demand:
 
@@ -31,7 +23,4 @@ This project uses a two-tier memory bank at `memory-bank/`.
 - After completing a feature or making a significant decision, update `activeContext.md` and the relevant on-demand file.
 - `activeContext.md` is a queue: evict completed items to `decisionLog.md`.
 - Never let `activeContext.md` exceed 20 lines.
-
-## Conventions
-
-<!-- Populated from detection or manually. Keep to ≤10 rules. -->
+- You can invoke the `@memory-bank-synchronizer` agent or type `/update-memory-bank` to trigger a full sync.
