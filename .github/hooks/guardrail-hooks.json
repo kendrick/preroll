@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "./scripts/guardrails/scope-check-hook.sh",
+        "windows": "powershell -NoProfile -File ./scripts/guardrails/scope-check-hook.ps1",
+        "timeout": 5
+      }
+    ],
+    "PostToolUse": [
+      {
+        "type": "command",
+        "command": "./scripts/guardrails/checkpoint-commit-hook.sh",
+        "windows": "powershell -NoProfile -File ./scripts/guardrails/checkpoint-commit-hook.ps1",
+        "timeout": 10
+      },
+      {
+        "type": "command",
+        "command": "./scripts/guardrails/time-monitor-hook.sh",
+        "windows": "powershell -NoProfile -File ./scripts/guardrails/time-monitor-hook.ps1",
+        "timeout": 5
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "./scripts/guardrails/session-end-check.sh",
+        "windows": "powershell -NoProfile -File ./scripts/guardrails/session-end-check.ps1",
+        "timeout": 10
+      }
+    ]
+  }
+}
