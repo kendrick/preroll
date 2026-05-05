@@ -71,11 +71,12 @@ These checks should be brief: one or two lines woven into the natural flow of wo
 
 ### Dedicated guardrail agents (available for deeper checks when needed):
 
-| Agent         | When to use                                         |
-| ------------- | --------------------------------------------------- |
-| `scope-guard` | Deep scope analysis when a feature feels ambiguous  |
-| `time-keeper` | Detailed time breakdown when falling behind         |
-| `demo-check`  | Full presentation-readiness audit in the final hour |
+| Agent                        | When to use                                                                            |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| `scope-guard`                | Deep scope analysis when a feature feels ambiguous                                     |
+| `time-keeper`                | Detailed time breakdown when falling behind                                            |
+| `demo-check`                 | Full presentation-readiness audit in the final hour                                    |
+| `demo-walkthrough-generator` | After writing `docs/demo-narrative.md`. Generates a Playwright dress rehearsal script. |
 
 ### Hooks (fully automatic, silent unless thresholds are breached):
 
