@@ -12,7 +12,7 @@
 $root = git rev-parse --show-toplevel 2>$null
 if (-not $root) { $root = "." }
 $budgetFile = Join-Path $root "docs/time-budget.md"
-$stateFile = Join-Path $env:TEMP "preroll-time-monitor.txt"
+$stateFile = Join-Path $env:TEMP "preamp-time-monitor.txt"
 
 if (-not (Test-Path $budgetFile)) { exit 0 }
 

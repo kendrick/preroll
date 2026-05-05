@@ -2,7 +2,7 @@
 
 ## What This Is
 <!-- One sentence. What does this project do? -->
-preroll — _add a one-sentence description here._
+preamp — _add a one-sentence description here._
 
 ## Stack
 - Language: JavaScript/TypeScript

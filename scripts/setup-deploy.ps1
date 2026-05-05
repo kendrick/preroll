@@ -5,7 +5,7 @@
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "=== Preroll: Deploy Setup ===" -ForegroundColor Cyan
+Write-Host "=== Preamp: Deploy Setup ===" -ForegroundColor Cyan
 Write-Host ""
 
 # Check for Vercel CLI

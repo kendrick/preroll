@@ -6,7 +6,7 @@
 
 set -e
 
-echo "=== Preroll: Deploy Setup ==="
+echo "=== Preamp: Deploy Setup ==="
 echo ""
 
 # Check for Vercel CLI

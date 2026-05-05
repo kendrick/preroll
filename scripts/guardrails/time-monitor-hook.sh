@@ -12,7 +12,7 @@
 
 ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
 BUDGET_FILE="$ROOT/docs/time-budget.md"
-STATE_FILE="/tmp/preroll-time-monitor-$$"
+STATE_FILE="/tmp/preamp-time-monitor-$$"
 
 [ ! -f "$BUDGET_FILE" ] && exit 0
 
